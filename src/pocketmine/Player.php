@@ -3414,12 +3414,14 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 	}
 
 	public function calcExpLevel(){
-		while($this->experience >= $this->getExpectedExperience()){
+		do{
 			$this->explevel++;
-		}
-		while($this->experience < $this->server->getExpectedExperience($this->explevel - 1)){
-			$this->explevel--;
-		}
+		}while($this->experience >= $this->getExpectedExperience());
+		do{
+		$this->explevel--;
+		}while($this->experience < $this->server->getExpectedExperience($this->explevel - 1));
+			
+		
 	}
 
 	public function addExperience($exp): bool{
